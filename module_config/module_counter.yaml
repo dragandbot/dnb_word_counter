@@ -1,0 +1,16 @@
+package: dnb_word_counter
+name: 'Word Counter'
+description: 'This component counts the number of words of a given string'
+type: utils/counter
+roslaunch: start.launch
+configuration:
+  - id: offset
+    namespace: ''
+    name: 'Words included as offset'
+    description: 'This value will be taken as offset in the count'
+    datatype: int
+    default: '0'
+nodes:
+  - node_callerid: /word_counter
+    type: counter.cpp
+status_topic: /word_counter/status

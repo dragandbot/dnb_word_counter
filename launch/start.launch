@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="offset" default="0"/>
+	<node name="word_counter" pkg="dnb_word_counter" type="counter.py">
+		<param name="offset" value="$(arg offset)"/>
+	</node>
+</launch>

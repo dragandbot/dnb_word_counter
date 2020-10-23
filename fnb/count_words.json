@@ -1,0 +1,59 @@
+{
+    "version": "3.0.0-pre.1",
+    "errorcodes": [
+        "EMPTY"
+    ],
+    "skip": false,
+    "type": "Basic",
+    "title": "Count Words",
+    "description": "This function blocks counts the number of words given as input",
+    "image": "dnb-icon-speech_bubble_round_dots",
+    "script": "#!/usr/bin/env python\n\n# optional IMPORTS\n# e.g import rospy\n\nimport rospy\nfrom dnb_word_counter.srv import *\n\ndef execute(input_parameters, output_parameters):\n\t\n\tif len(input_parameters[0][\"value\"]) < 1: \n\t\traise Exception(\"EMPTY\")\n\n\trospy.wait_for_service('/word_counter/count_words')\n\tsrv = rospy.ServiceProxy('/word_counter/count_words', CountWords)\n\toutput_parameters[0][\"value\"] = str(srv(input_parameters[0][\"value\"]).words)\n\t\n\tdebug = str(input_parameters[1][\"value\"]).lower()\n\t\n\tif debug == \"true\":\n\t\trospy.logerr(str(output_parameters[0][\"value\"]))\n\t\n\treturn output_parameters\n",
+    "identifier": "b0a007c4-45cb-457f-bc03-a9e09afea965",
+    "inputParameters": [
+        {
+            "availableOptions": [],
+            "paramId": "2cc38794-1058-4624-a48a-e3daf14a27f5",
+            "displayTitle": "text",
+            "title": "text",
+            "description": null,
+            "value": null,
+            "type": "primitive",
+            "parameters": [],
+            "dataType": "string",
+            "reference": null,
+            "constraints": []
+        },
+        {
+            "availableOptions": [],
+            "paramId": "4630f756-4bbd-44b1-af89-76bd3e7142bf",
+            "displayTitle": "debug",
+            "title": "debug",
+            "description": null,
+            "value": "true",
+            "type": "primitive",
+            "parameters": [],
+            "dataType": "boolean",
+            "reference": null,
+            "constraints": []
+        }
+    ],
+    "outputParameters": [
+        {
+            "availableOptions": [],
+            "paramId": "80daf3a4-f8f1-4e01-9c34-b7044e409fcb",
+            "displayTitle": "number of words",
+            "title": "number_of_words",
+            "description": null,
+            "value": null,
+            "type": "primitive",
+            "parameters": [],
+            "dataType": "integer",
+            "reference": null,
+            "constraints": []
+        }
+    ],
+    "globalParameters": [],
+    "models": [],
+    "format": "linked#2.4.0"
+}
